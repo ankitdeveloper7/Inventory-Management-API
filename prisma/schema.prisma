@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://neondb_owner:npg_8xj3LZwlIoOJ@ep-jolly-queen-ae4f1f6i-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require&statement_cache_mode=describe"
+}
+
+enum Movement_Type{
+  in
+  out
+}
+
+// model Admin{
+//   id Int @id @default(autoincrement())
+//   email String @unique
+//   password String
+// }
+
+model Category{
+  id Int @id @default(autoincrement())
+  name String
+  lifespan Int
+  created_at DateTime @default(now())
+  product Product[]
+}
+
+model Supply{
+  id Int @id @default(autoincrement())
+  name String
+  address String
+  contact_number BigInt @unique
+  email String @unique
+  product Product[]
+}
+
+model Product{
+ id Int @id @default(autoincrement())
+ name String
+ categoriesId Int
+ supplierId Int
+ stock_quantity Int
+ price Int
+ offer Int
+ created_at DateTime @default(now())
+ updated_at DateTime @updatedAt
+ categories Category @relation(fields: [categoriesId], references: [id])
+ supplies Supply @relation(fields: [supplierId], references: [id])
+stockmovement StockMovement[]
+}
+
+
+
+model StockMovement{
+  id Int @id @default(autoincrement())
+  productId Int
+  movement_type Movement_Type @default(in)
+  quantity Int
+  source_address String
+  destination_address String
+  contact_number BigInt @unique
+  email String @unique
+  delivery_address String
+  created_at DateTime @default(now())
+  product Product @relation(fields: [productId], references: [id])
+}

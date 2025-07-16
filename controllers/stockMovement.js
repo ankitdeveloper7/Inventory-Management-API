@@ -74,7 +74,7 @@ const GetStockMovements = async (req, res) => {
 };
 
 // GET stock movement by contact_number
-const FilterStockByDelivery = async (req, res) => {
+const FilterStockByContact = async (req, res) => {
   try {
     const { contact_number } = req.body;
 
@@ -127,6 +127,6 @@ const DeleteStockMovement = async (req, res) => {
 export {
   AddStockMovement,
   GetStockMovements,
-  FilterStockByDelivery,
+  FilterStockByContact,
   DeleteStockMovement,
 };

@@ -29,8 +29,8 @@ import {
 import {
   AddStockMovement,
   GetStockMovements,
-  FilterStockByDelivery,
   DeleteStockMovement,
+  FilterStockByContact,
 } from "./controllers/stockMovement.js";
 // import cate
 
@@ -68,7 +68,7 @@ app.delete("/product/delete", DeleteProduct);
 // stock movement section
 app.post("/stock/add", AddStockMovement);
 app.get("/stock", GetStockMovements);
-app.post("/stock/filter", FilterStockByDelivery);
+app.post("/stock/filter", FilterStockByContact);
 app.delete("/stock/delete", DeleteStockMovement);
 
 app.listen(PORT, () => {

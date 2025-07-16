@@ -68,6 +68,7 @@ model StockMovement{
   contact_number BigInt @unique
   email String @unique
   delivery_address String
+  delivery_date DateTime
   created_at DateTime @default(now())
   product Product @relation(fields: [productId], references: [id])
 }
